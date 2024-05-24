@@ -2,16 +2,6 @@
 #include <stdlib.h> // biblioteca de alocação de espaço em memoria
 #include <locale.h> // bliblioteca de alocação de texto por região
 #include <string.h>
-int pause(){
- #ifdef _WIN32
- system("pause");
- system("cls");;
- #endif // _WIN32
- #ifdef linux
- getchar();
- system("clear");
- #endif
-}
 int registro()
 {
 
@@ -63,8 +53,16 @@ int registro()
  file= fopen(arquivo, "a");
  fprintf(file,cargo);
  fclose(file);
+ file = fopen(cpf, "r");
 
- pause();
+ if(file == NULL){
+     printf("A sua requesição não existe!");
+ }else{
+ printf("Cadastro Realizado com sucesso!");
+ system("pause");
+ }
+
+
 
 }
 int consulta()
@@ -88,6 +86,8 @@ int consulta()
      printf("%s", conteudo);
      printf("\n\n");
  }
+ system("pause");
+ system("cls");
 
 }
 int deletar()
@@ -120,6 +120,7 @@ int main()
         printf("\t1 - Resgistrar Nomes\n");
         printf("\t2 - Consultar Nomes\n");
         printf("\t3 - Deletar Nomes\n");
+        printf("\t4 - Sair\n");
         printf("Opção:");// final do menu
 
         scanf("%d", &opcao); //ler oque é digitado e registrado na variavel opcao
@@ -134,6 +135,10 @@ int main()
             break;
             case 3:
              deletar();
+            break;
+            case 4:
+             printf("Obrigado por utilizar,até uma proxima!");
+             return 0;
             break;
             default:
              printf("Essa alternativa não existe");
